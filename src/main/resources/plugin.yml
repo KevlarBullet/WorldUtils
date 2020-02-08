@@ -1,0 +1,5 @@
+name: ${project.name}
+version: ${project.version}
+main: me.silver.worldutils.WorldUtils
+author: Silver
+load: STARTUP
