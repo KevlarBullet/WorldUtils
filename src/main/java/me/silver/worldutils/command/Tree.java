@@ -17,7 +17,7 @@ public class Tree extends BaseCommand {
     @Subcommand("grow")
     public static void createTree(Player sender, @Default("F") String treeString, Integer iterations) {
         Block block = sender.getTargetBlock(null, 20);
-        Location blockLocation = (block.getLocation().add(0, 1, 0));
+        Location blockLocation = (block.getLocation().add(0.5, 1.5, 0.5));
 
         BaseTree tree = new BaseTree(treeString, iterations);
         tree.buildTree(blockLocation);
