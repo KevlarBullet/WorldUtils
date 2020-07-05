@@ -1,9 +1,7 @@
 package me.silver.worldutils;
 
 import co.aikar.commands.PaperCommandManager;
-import me.silver.worldutils.command.ChangeVariable;
-import me.silver.worldutils.command.Line;
-import me.silver.worldutils.command.Tree;
+import me.silver.worldutils.command.*;
 import me.silver.worldutils.util.SilverChunkGenerator;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,7 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class WorldUtils extends JavaPlugin {
 
     private static WorldUtils worldUtils;
-    private static SilverChunkGenerator generator;
+    private static SilverChunkGenerator generator = null;
 
     @Override
     public void onEnable() {
@@ -22,7 +20,9 @@ public class WorldUtils extends JavaPlugin {
 
     @Override
     public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
-        generator = new SilverChunkGenerator();
+        if (generator == null) {
+            generator = new SilverChunkGenerator();
+        }
         return generator;
     }
 
@@ -41,5 +41,7 @@ public class WorldUtils extends JavaPlugin {
         manager.registerCommand(new ChangeVariable());
         manager.registerCommand(new Line());
         manager.registerCommand(new Tree());
+        manager.registerCommand(new ReloadChunk());
+        manager.registerCommand(new MarkChunk());
     }
 }

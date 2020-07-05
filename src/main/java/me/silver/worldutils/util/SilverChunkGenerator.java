@@ -1,5 +1,6 @@
 package me.silver.worldutils.util;
 
+import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
@@ -8,6 +9,9 @@ import org.bukkit.util.noise.SimplexOctaveGenerator;
 import java.util.Random;
 
 public class SilverChunkGenerator extends ChunkGenerator {
+
+    private Chunk chunkOne = null;
+    private Chunk chunkTwo = null;
 
     private double scale = 0.004;
     private double frequency = 1.8;
@@ -80,6 +84,43 @@ public class SilverChunkGenerator extends ChunkGenerator {
         }
 
         return chunkData;
+    }
+
+    public void reloadChunks(World world) {
+        int x1;
+        int z1;
+        int x2;
+        int z2;
+
+        if (chunkOne.getX() < chunkTwo.getX()) {
+            x1 = chunkOne.getX();
+            x2 = chunkTwo.getX();
+        } else {
+            x2 = chunkOne.getX();
+            x1 = chunkTwo.getX();
+        }
+
+        if (chunkOne.getZ() < chunkTwo.getZ()) {
+            z1 = chunkOne.getZ();
+            z2 = chunkTwo.getZ();
+        } else {
+            z2 = chunkOne.getZ();
+            z1 = chunkTwo.getZ();
+        }
+
+        for (int i = x1; i <= x2; i++) {
+            for (int j = z1; j <= z2; j++) {
+                world.regenerateChunk(i, j);
+            }
+        }
+    }
+
+    public void setChunkOne(Chunk chunkOne) {
+        this.chunkOne = chunkOne;
+    }
+
+    public void setChunkTwo(Chunk chunkTwo) {
+        this.chunkTwo = chunkTwo;
     }
 
     public void setScale(double scale) {
