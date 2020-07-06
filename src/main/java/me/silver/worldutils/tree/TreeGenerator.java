@@ -3,12 +3,13 @@ package me.silver.worldutils.tree;
 import me.silver.worldutils.util.Utils;
 import net.minecraft.server.v1_12_R1.Vec3D;
 import org.bukkit.Location;
+import org.bukkit.Material;
 
 import java.util.HashMap;
 import java.util.Stack;
 
 // This really doesn't have to have instances - it's more of a utility class
-public class BaseTree {
+public class TreeGenerator {
 
     public static HashMap<Character, String> rules = new HashMap<>();
 
@@ -23,13 +24,13 @@ public class BaseTree {
     // &: Pitch down
     // !: Decrease width // Still need to implement this
     // L: Create leaf
-    // X: Placeholder to be replaced
+    // Anything else will be counted as a placeholder to be replaced by a rule
     private String treeString;
     private final int iterations;
 
     private final Stack<Location> treeNodes = new Stack<>();
 
-    public BaseTree(String treeString, int iterations) {
+    public TreeGenerator(String treeString, int iterations) {
         this.treeString = treeString;
         this.iterations = iterations;
     }
@@ -79,6 +80,13 @@ public class BaseTree {
                     break;
                 case '!':
                     // TODO: Implement width
+                    break;
+                case 'L':
+                    o = new Vec3D(currentLocation.getX(), currentLocation.getY(), currentLocation.getZ());
+                    e = o.e(Utils.fromPitchYaw(currentLocation.getPitch(), currentLocation.getYaw()).a(4d));
+                    endLocation = new Location(currentLocation.getWorld(), e.x, e.y, e.z, currentLocation.getYaw(), currentLocation.getPitch());
+
+                    endLocation.getBlock().setType(Material.LEAVES);
             }
         }
 
