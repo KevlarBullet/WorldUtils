@@ -10,8 +10,8 @@ import java.util.Random;
 
 public class SilverChunkGenerator extends ChunkGenerator {
 
-    private Chunk chunkOne = null;
-    private Chunk chunkTwo = null;
+    public Chunk chunkOne = null;
+    public Chunk chunkTwo = null;
 
     private double scale = 0.004;
     private double frequency = 1.8;
@@ -39,9 +39,9 @@ public class SilverChunkGenerator extends ChunkGenerator {
                 // - Frequency: Changes the horizontal size of each subsequent octave
                 //      Higher values create narrower/more defined details
                 // - Amplitude: Determines the height of each wave
-                //      Lower values create taller hills
+                //      Lower values create taller hills // Really it should make the waves taller, but okay
                 // - Normalize:
-                //
+                //      Limit range of outputs to [-1, 1]
                 // - MAX_HILL_HEIGHT: The max height difference for hills
                 // - GROUND_OFFSET: Bringing the land up to a more normal height
                 double noise = generator.noise(chunkX * 16 + x, chunkZ * 16 + z, this.frequency, this.amplitude, true) + 1;
@@ -115,13 +115,13 @@ public class SilverChunkGenerator extends ChunkGenerator {
         }
     }
 
-    public void setChunkOne(Chunk chunkOne) {
-        this.chunkOne = chunkOne;
-    }
-
-    public void setChunkTwo(Chunk chunkTwo) {
-        this.chunkTwo = chunkTwo;
-    }
+//    public void setChunkOne(Chunk chunkOne) {
+//        this.chunkOne = chunkOne;
+//    }
+//
+//    public void setChunkTwo(Chunk chunkTwo) {
+//        this.chunkTwo = chunkTwo;
+//    }
 
     public void setScale(double scale) {
         this.scale = scale;
