@@ -5,7 +5,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Subcommand;
-import me.silver.worldutils.tree.BaseTree;
+import me.silver.worldutils.tree.TreeGenerator;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -19,7 +19,7 @@ public class Tree extends BaseCommand {
         Block block = sender.getTargetBlock(null, 20);
         Location blockLocation = (block.getLocation().add(0.5, 1.5, 0.5));
 
-        BaseTree tree = new BaseTree(treeString, iterations);
+        TreeGenerator tree = new TreeGenerator(treeString, iterations);
         tree.buildTree(blockLocation);
     }
 
@@ -27,17 +27,19 @@ public class Tree extends BaseCommand {
     public static void defineRule(Player sender, String letter, String rule) {
         char character = letter.toLowerCase().charAt(0);
 
-        if (BaseTree.rules.containsKey(character)) {
+        if (TreeGenerator.rules.containsKey(character)) {
             sender.sendMessage("Updated rule for character '" + letter.charAt(0) + "' to '" + rule + "'");
         } else {
             sender.sendMessage("Set rule for character '" + letter.charAt(0) + "' to '" + rule + "'");
         }
 
-        BaseTree.rules.put(character, rule);
+        TreeGenerator.rules.put(character, rule);
     }
 
     @Subcommand("rules")
     public static void listRules(Player sender) {
+//        Shulker shulker = new Cr
+//                EntityShulker sh = new EntityShulker(null);
 
     }
 }
