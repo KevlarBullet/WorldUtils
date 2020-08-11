@@ -43,5 +43,6 @@ public class WorldUtils extends JavaPlugin {
         manager.registerCommand(new Tree());
         manager.registerCommand(new ReloadChunk());
         manager.registerCommand(new MarkChunk());
+        manager.registerCommand(new Mask());
     }
 }

@@ -48,7 +48,13 @@ public class SilverChunkGenerator extends ChunkGenerator {
 
 //                int y = (int) ((Math.atan(5 * noise) / 180 + 0.5) * MAX_HILL_HEIGHT + GROUND_OFFSET);
 
-                double noiseY = Math.pow(noise, noise) * 40 + 62;
+                double noiseY;
+
+                if (noise <= 0) {
+                    noiseY = Math.pow(2 * noise + 1, 0.2) * 15 + 35;
+                } else {
+                    noiseY = Math.pow(noise, 3) * 15 + 65;
+                }
 
                 int y = (int)noiseY;
 //                Material material;
@@ -67,10 +73,10 @@ public class SilverChunkGenerator extends ChunkGenerator {
 //                }
 
 
-                if (y >= SEA_LEVEL) {
+                if (y >= SEA_LEVEL + 3) {
                     chunkData.setBlock(x, y, z, Material.GRASS);
                 } else {
-                    chunkData.setBlock(x, y, z, Material.DIRT);
+                    chunkData.setBlock(x, y, z, Material.SAND);
                 }
 
                 for (int stone = y - 1; stone > 0; stone--) {
